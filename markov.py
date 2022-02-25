@@ -83,19 +83,26 @@ def markovScotch():
     my_quote += start1
     i_word = start1
     tempWord = start1
-
+    with open('json_log_file.json', 'w') as outfile:
+        outfile.write("Debug File for markovScotch() function\n")
     while (i_word not in endWords) or (runNum < 6):
         
         i_word = random.choice(dictWords[i_word])
         
         if runNum < 6:
             while (i_word in endWords):
+                json_file = json.dumps(i_word)
+                with open('json_log_file.json', 'a') as outfile:
+                    outfile.write(json_file)
+                    outfile.write("\n")
                 i_word = random.choice(dictWords[tempWord])
-                
+        
         my_quote += " "
         my_quote += i_word
         runNum += 1
         tempWord = str(i_word)
+
+    
 
     print(my_quote)
 
